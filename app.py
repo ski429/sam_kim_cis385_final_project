@@ -1,12 +1,30 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for
 
 app = Flask(__name__)
 
+menu = [
+    {
+        'name': 'sausage pizza',
+        'pic': 1,
+        'cost': 10
+    },
+    {
+        'name': 'pepperoni pizza',
+        'pic': 2,
+        'cost': 10
+    },
+    {
+        'name': 'cheese pizza',
+        'pic': 3,
+        'cost': 7
+    }
+]
+
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
+def home():
+    return render_template('index.html', menu=menu)
 
 
 if __name__ == '__main__':
