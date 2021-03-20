@@ -19,12 +19,12 @@ def index():
             db.session.add(new_item_by_order)
             print(new_item_by_order)
         db.session.commit()
-        return redirect('/order_details')
+        return redirect(f'/order_details/{new_order_id}')
 
     else:
         return render_template('index.html', menu=menu_query)
 
 
-@app.route('/order_details', methods=['GET'])
-def order_detail():
-    return render_template('your_order_details.html')
+@app.route('/order_details/<int:order_id>', methods=['GET'])
+def order_detail(order_id):
+    return render_template('your_order_details.html', order=order_id)
