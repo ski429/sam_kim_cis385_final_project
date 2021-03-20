@@ -26,7 +26,25 @@ def index():
 
 @app.route('/order_details/<int:order_num>', methods=['GET'])
 def order_detail(order_num):
+    # Accumulator for cost of order (initialized with default of 0)
+    total = 0
+    # Multiple table join to get complete order information
     order_placed = db.session.query(Order, ItemsByOrder, Item)\
           .join(ItemsByOrder, ItemsByOrder.order_id == Order.id)\
           .join(Item, Item.id == ItemsByOrder.item_id).filter(Order.id==order_num)
-    return render_template('your_order_details.html', order=order_placed)
+    # Retrieve ItemsByOrder.qty and Item.item_cost to calc total cost
+    for item in order_placed:
+        if item[1].qty and item[1].qty > 0:
+            total += item[1].qty * item[2].item_cost
+    # Update missing Order.order_total
+    db.session.commit()
+    return render_template('your_order_details.html', data=order_placed)
+
+
+@app.route('/order_cancel/<int:order_num>', methods=['DELETE'])
+def delete_order(order_num):
+    order_to_delete = Order.query.filter_by(order_id=order_num)
+    db.session.delete(order_to_delete)
+    db.session.commit()
+    return render_template('order_canceled.html', order_id=order_num)
+

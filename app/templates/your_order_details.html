@@ -20,11 +20,11 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="content-section">
-                    <h3>Your order number: {{ order[0][0].id }}</h3>
+                    <h2>Your order number: {{ data[0][0].id }}</h2>
                     <p class='text-muted'>
                     <ul class="list-group">
 
-                        {% for item in order %}
+                        {% for item in data %}
                         <div class="list-group-item list-group-item-light">
                             <div><em>{{ item[1].qty }} x {{ item[2].item_name }}</em></div>
                             <div align="right">{{ "${0:.2f}".format(item[2].item_cost * item[1].qty) }}</div>
@@ -33,15 +33,15 @@
 
                         <div class="list-group-item list-group-item-light" id="subTotal">
                             <div>Subtotal:</div>
-                            <div align="right">{{ "${0:.2f}".format(order[0][0].order_total) }}</div>
+                            <div align="right">{{ "${0:.2f}".format(data[0][0].order_total) }}</div>
                         </div>
                         <div class="list-group-item list-group-item-light" id="subTotal">
                             <div>Tax @ 10.0%:</div>
-                            <div align="right">{{ "${0:.2f}".format(order[0][0].order_total * 0.1) }}</div>
+                            <div align="right">{{ "${0:.2f}".format(data[0][0].order_total * 0.1) }}</div>
                         </div>
                         <div class="list-group-item list-group-item-light" id="subTotal">
                             <div><b>Total:</b></div>
-                            <div align="right">{{ "${0:.2f}".format(order[0][0].order_total * 1.1)}}</div>
+                            <div align="right">{{ "${0:.2f}".format(data[0][0].order_total * 1.1)}}</div>
                         </div>
                     </ul>
                     </p>
