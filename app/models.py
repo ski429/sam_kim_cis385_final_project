@@ -1,12 +1,4 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask import render_template, url_for
-import datetime
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-db = SQLAlchemy(app)
+from app import db
 
 
 class Item(db.Model):
@@ -33,31 +25,3 @@ class ItemsByOrder(db.Model):
     qty = db.Column(db.Integer, nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
-
-
-menu = [
-    {
-        'name': 'sausage pizza',
-        'pic': 1,
-        'cost': 10
-    },
-    {
-        'name': 'pepperoni pizza',
-        'pic': 2,
-        'cost': 10
-    },
-    {
-        'name': 'cheese pizza',
-        'pic': 3,
-        'cost': 7
-    }
-]
-
-
-@app.route('/')
-def home():
-    return render_template('index.html', menu=menu)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
