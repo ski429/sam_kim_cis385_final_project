@@ -11,28 +11,48 @@
 </head>
 <body>
     <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {% for item in menu %}
-            <h4>{{ item.name }}</h4>
-            <p>{{ item.cost }}</p>
-            <p>{{ item.pic }}</p>
-          {% endfor %}
+        <div class="row">
+            <form class="col-md-8">
+                <div class="form-row align-items-center">
+                    {% for item in menu %}
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">{{ item.name }}</p>
+                            <p class="card-text">$ {{ item.cost }}</p>
+                        </div>
+                        <div class="col-auto my-1">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Quantity</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>Your Order</h3>
+                    <p class='text-muted'>You can put any information here you'd like.
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">pizza</li>
+                        <li class="list-group-item list-group-item-light">pizza</li>
+                        <li class="list-group-item list-group-item-light">pizza</li>
+                        <li class="list-group-item list-group-item-light">pizza</li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Your Order</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">pizza</li>
-                <li class="list-group-item list-group-item-light">pizza</li>
-                <li class="list-group-item list-group-item-light">pizza</li>
-                <li class="list-group-item list-group-item-light">pizza</li>
-              </ul>
-            </p>
-          </div>
-        </div>
-      </div>
     </main>
 
 
