@@ -18,7 +18,7 @@ class Order(db.Model):
     order_total = db.Column(db.Float, nullable=False, default=0)
 
     def __repr__(self):
-        return f"Item('{self.order_total}', '{self.id}')"
+        return f"Order('{self.order_total}', '{self.id}')"
 
 
 class ItemsByOrder(db.Model):
