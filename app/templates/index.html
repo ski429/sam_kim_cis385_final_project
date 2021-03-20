@@ -10,14 +10,15 @@
     <title>Order Pizza!</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/">
-            <img src="{{ url_for('static', filename='pizza.png') }}" alt="pizza" width="30" height="30" class="d-inline-block align-top">
-            Home
-        </a>
-    </nav>
+
 
     <main role="main" class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="{{ url_for('static', filename='pizza.png') }}" alt="pizza" width="30" height="30" class="d-inline-block align-top">
+                Home
+            </a>
+        </nav>
         <div class="row">
             <form class="col-md-6" action="/" method="post">
                 <div class="form-row align-items-center">

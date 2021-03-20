@@ -14,6 +14,7 @@ class Item(db.Model):
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order_time = db.Column(db.DateTime, nullable=False)
+    order_items = db.relationship('ItemsByOrder', backref='items')
     order_total = db.Column(db.Float, nullable=False, default=0)
 
     def __repr__(self):

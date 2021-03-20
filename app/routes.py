@@ -27,4 +27,5 @@ def index():
 
 @app.route('/order_details/<int:order_id>', methods=['GET'])
 def order_detail(order_id):
+    # TODO Query db
     return render_template('your_order_details.html', order=order_id)
