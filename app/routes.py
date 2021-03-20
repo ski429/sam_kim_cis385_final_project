@@ -17,7 +17,6 @@ def index():
             quantity = request.form[f'item{item.id}']
             new_item_by_order = ItemsByOrder(qty=quantity, item_id=item.id, order_id=new_order_id)
             db.session.add(new_item_by_order)
-            print(new_item_by_order)
         db.session.commit()
         return redirect(f'/order_details/{new_order_id}')
 
@@ -25,7 +24,9 @@ def index():
         return render_template('index.html', menu=menu_query)
 
 
-@app.route('/order_details/<int:order_id>', methods=['GET'])
-def order_detail(order_id):
-    # TODO Query db
-    return render_template('your_order_details.html', order=order_id)
+@app.route('/order_details/<int:order_num>', methods=['GET'])
+def order_detail(order_num):
+    order_placed = db.session.query(Order, ItemsByOrder, Item)\
+          .join(ItemsByOrder, ItemsByOrder.order_id == Order.id)\
+          .join(Item, Item.id == ItemsByOrder.item_id).filter(Order.id==order_num)
+    return render_template('your_order_details.html', order=order_placed)
