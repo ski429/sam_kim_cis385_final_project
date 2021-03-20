@@ -11,16 +11,38 @@
 </head>
 <body>
     <main role="main" class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="{{ url_for('static', filename='pizza.png') }}" alt="pizza" width="30" height="30" class="d-inline-block align-top">
+                Home
+            </a>
+        </nav>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <div class="content-section">
-                    <h3>Your Order</h3>
+                    <h3>Your order number: {{ order[0][0].id }}</h3>
                     <p class='text-muted'>
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-light">item_name x item_cost = $</li>
-                        <li class="list-group-item list-group-item-light" id="subTotal">Subtotal: </li>
-                        <li class="list-group-item list-group-item-light" id="subTotal">Tax: </li>
-                        <li class="list-group-item list-group-item-light" id="subTotal">Total: </li>
+
+                        {% for item in order %}
+                        <div class="list-group-item list-group-item-light">
+                            <div><em>{{ item[1].qty }} x {{ item[2].item_name }}</em></div>
+                            <div align="right">{{ "${0:.2f}".format(item[2].item_cost * item[1].qty) }}</div>
+                        </div>
+                        {% endfor %}
+
+                        <div class="list-group-item list-group-item-light" id="subTotal">
+                            <div>Subtotal:</div>
+                            <div align="right">{{ "${0:.2f}".format(order[0][0].order_total) }}</div>
+                        </div>
+                        <div class="list-group-item list-group-item-light" id="subTotal">
+                            <div>Tax @ 10.0%:</div>
+                            <div align="right">{{ "${0:.2f}".format(order[0][0].order_total * 0.1) }}</div>
+                        </div>
+                        <div class="list-group-item list-group-item-light" id="subTotal">
+                            <div><b>Total:</b></div>
+                            <div align="right">{{ "${0:.2f}".format(order[0][0].order_total * 1.1)}}</div>
+                        </div>
                     </ul>
                     </p>
                 </div>
